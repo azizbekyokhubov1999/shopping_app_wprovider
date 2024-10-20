@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Theme {
+class Themes {
   static double height = WidgetsBinding.instance.platformDispatcher.views.first
       .physicalSize.height /WidgetsBinding.instance.platformDispatcher.views.first.devicePixelRatio;
 

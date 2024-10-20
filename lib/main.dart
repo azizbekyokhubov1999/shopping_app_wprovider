@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopping_app_wprovider/provider/cart_provider.dart';
 import 'package:shopping_app_wprovider/provider/product_provider.dart';
 import 'package:shopping_app_wprovider/screens/main_screen.dart';
+import 'package:shopping_app_wprovider/themes/theme.dart';
 
 void main() {
   runApp(
@@ -24,6 +25,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Shopping app with provider',
       debugShowCheckedModeBanner: false,
+      theme: Themes.light,
+      themeMode: ThemeMode.light,
       home: MainScreen(),
     );
   }
