@@ -6,6 +6,8 @@ import 'package:shopping_app_wprovider/models/product_model.dart';
 import 'package:shopping_app_wprovider/provider/cart_provider.dart';
 import 'package:shopping_app_wprovider/provider/product_provider.dart';
 
+import '../screens/product_screen/product_screen.dart';
+
 class Product extends StatefulWidget {
   final ProductModel product;
   const Product({
@@ -48,12 +50,12 @@ class _ProductState extends State<Product> {
                   child: Center(
                     child: GestureDetector(
                       onTap: (){
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) =>
-                        //     ProductScreen(product: widget.product),
-                        //     ));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                            ProductScreen(product: widget.product),
+                            ));
                       },
                       child: Image.asset(widget.product.image,
                       fit: BoxFit.contain,
