@@ -125,7 +125,7 @@ class _ProductState extends State<Product> {
                     ),
                   ),
                 ],
-              )
+              ),
             ),
             SizedBox(width: size.width * 0.020),
             Row(

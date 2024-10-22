@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:shopping_app_wprovider/models/product_model.dart';
 import 'package:shopping_app_wprovider/provider/product_provider.dart';
 
+import '../../provider/cart_provider.dart';
+
 class ProductScreen extends StatefulWidget {
   final ProductModel product;
 
@@ -53,9 +55,9 @@ class _ProductScreenState extends State<ProductScreen> {
             )
           ],
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-              padding: EdgeInsets.all(15),
+        body: Padding(
+          padding: const EdgeInsets.all(15),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -253,9 +255,89 @@ class _ProductScreenState extends State<ProductScreen> {
 
               ],
             ),
+
           ),
         ),
+        bottomNavigationBar: Container(
+          height: size.height * 0.08,
+          margin: EdgeInsets.all(15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                children: [
+                  Text("Price: ",
+                    style: GoogleFonts.poppins(
+                      color: Colors.black54,
+                      fontSize: size.width * 0.04,
+                    ),
+                  ),
+                  SizedBox(height: size.height * 0.01),
+                  Text("\$ ${widget.product.price}",
+                    style: GoogleFonts.poppins(
+                      fontSize: size.width * 0.055,
+                      fontWeight: FontWeight.w600,
 
+                    ),
+                  ),
+                ],
+              ),
+              widget.product.isAvailable ? Container(
+                width: size.width / 2,
+                height: size.height * 0.06,
+                child: ElevatedButton(
+                    onPressed: () {
+                      context.read<CartProvider>().addToCart(widget.product);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.green,
+                            content: Text("Item added!",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),),
+                          )
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.indigo,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide.none,
+                        borderRadius: BorderRadius.circular(15),
+
+                      )
+                    ),
+                    child: Center(
+                      child: Text("Add to Cart",
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: size.height * 0.02,
+                        fontWeight: FontWeight.w500
+                      ),
+                      ),
+                    )
+                ),
+              ) : Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.redAccent,
+                    radius: 4,
+                  ),
+                  SizedBox(width: size.width * 0.020),
+                  Text(
+                    "Out of Stock",
+                    style: GoogleFonts.poppins(
+                      color: Colors.redAccent,
+                      fontWeight: FontWeight.w600,
+                      fontSize: size.width * 0.031,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
