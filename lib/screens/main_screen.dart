@@ -8,6 +8,7 @@ import 'package:shopping_app_wprovider/provider/cart_provider.dart';
 import 'package:shopping_app_wprovider/screens/home/home_screen.dart';
 import 'package:shopping_app_wprovider/themes/theme.dart';
 
+import '../widgets/cart_item.dart';
 import 'fovourite screen/favourite_screen.dart';
 
 class MainScreen extends StatefulWidget  {
@@ -33,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> _buildScreens = [
     HomeScreen(),
     FavouriteScreen(),
-    Container(),
+    CartItem(),
     Container(),
     Container(),
   ];
