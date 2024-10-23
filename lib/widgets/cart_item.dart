@@ -1,5 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app_wprovider/main.dart';
+import 'package:shopping_app_wprovider/provider/cart_provider.dart';
 
 import '../models/cart_model.dart';
 
@@ -7,7 +12,7 @@ class CartItem extends StatefulWidget {
   final CartModel cartItem;
   const CartItem({
     super.key,
-    required this.cartItem;
+    required this.cartItem,
   });
 
   @override
@@ -51,8 +56,87 @@ class _CartItemState extends State<CartItem> {
                 ),
                 ),
                 SizedBox(height: size.height * 0.005),
-
+                Text("\$ ${widget.cartItem.product.price}",
+                  style: GoogleFonts.poppins(
+                      fontSize: size.width * 0.035,
+                    color: Colors.black.withOpacity(0.8),
+                  ),
+                ),
+                SizedBox(height: size.width * 0.030),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        context.read<CartProvider>().incrementQty(widget.cartItem.id);
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black26,
+                          ),
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: Icon(
+                            Iconsax.add,
+                          color: Colors.black,
+                          size: 14,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 13),
+                    Text(
+                      widget.cartItem.quantity.toString(),
+                      style: GoogleFonts.poppins(),
+                    ),
+                    SizedBox(width: 13),
+                    GestureDetector(
+                      onTap: (){
+                        context.read<CartProvider>().decrimentQty(widget.cartItem.id);
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black26,
+                          ),
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: Icon(
+                          Iconsax.minus,
+                          color: Colors.black,
+                          size: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
+            ),
+          ),
+          GestureDetector(
+            onTap: (){
+              context.read<CartProvider>().removeItem(widget.cartItem.id);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Color.fromRGBO(255, 247, 247, 247),
+                    content: Text("Item removed",
+                    style: TextStyle(color: Colors.black),
+
+                    ),
+                ),
+              );
+            },
+            child: CircleAvatar(
+              backgroundColor: Colors.redAccent.withOpacity(0.07),
+              radius: 18,
+              child: Icon(
+                  CupertinoIcons.delete_solid,
+                color: Colors.redAccent,
+                size: 18,
+              ),
             ),
           )
         ],

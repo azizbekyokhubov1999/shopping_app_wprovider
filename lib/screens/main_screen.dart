@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app_wprovider/main.dart';
 import 'package:shopping_app_wprovider/provider/cart_provider.dart';
+import 'package:shopping_app_wprovider/screens/cart%20screen/cart_screen.dart';
 import 'package:shopping_app_wprovider/screens/home/home_screen.dart';
 import 'package:shopping_app_wprovider/themes/theme.dart';
 
@@ -34,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> _buildScreens = [
     HomeScreen(),
     FavouriteScreen(),
-    CartItem(),
+    CartScreen(),
     Container(),
     Container(),
   ];
